@@ -1,0 +1,59 @@
+rgb = imread("pears.png");
+I = im2gray(rgb);
+
+figure;
+subplot(2,2,1);
+imshow(rgb);
+title('Original Image')
+
+gmag = imgradient(I);
+subplot(2,2,2);
+imshow(gmag,[])
+title("Gradient Magnitude")
+
+bw = imbinarize(Iobrcbr);
+subplot(2,2,3);
+imshow(bw)
+title("Thresholded Opening-Closing by Reconstruction")
+
+Lrgb = label2rgb(L,"jet","w","shuffle");
+subplot(2,2,4);
+imshow(Lrgb)
+title("Colored Watershed Label Matrix")
+
+or
+
+I = imread('cameraman.tif');
+I = im2double(I);
+
+hy = fspecial('sobel');
+hx = hy';
+Iy = imfilter(I, hy, 'replicate');
+Ix = imfilter(I, hx, 'replicate');
+gradmag = sqrt(Ix.^2 + Iy.^2);
+
+L = watershed(gradmag);
+Lrgb = label2rgb(L);
+
+figure, imshow(I), title('Original Image')
+figure, imshow(Lrgb), title('Watershed Segmented Image')
+
+or
+
+rgb = imread('pears.png');
+I = im2gray(rgb);
+figure;
+subplot(2,2,1);
+imshow(I)
+title('Original Image')
+text(732,501,'Image courtesy of Corel(R)','FontSize',7,'HorizontalAlignment','right')
+gmag = imgradient(I);
+subplot(2,2,2);
+imshow(gmag,[])
+title('Gradient Magnitude')
+L = watershed(gmag);
+Lrgb = label2rgb(L);
+subplot(2,2,3);
+imshow(Lrgb)
+title('Watershed Transform of Gradient Magnitude')
+

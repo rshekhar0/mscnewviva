@@ -1,0 +1,32 @@
+% Read the image
+image = imread('DistortedImage.png');
+
+% Convert the image to grayscale if necessary
+if size(image, 3) > 1
+    image = rgb2gray(image);
+end
+
+% Set the gray-level range for slicing
+low_range = 100;
+high_range = 200;
+
+% Perform gray-level slicing without background
+sliced_image_no_bg = image;
+sliced_image_no_bg(image < low_range | image > high_range) = 0;
+
+% Perform gray-level slicing with background
+sliced_image_with_bg = image;
+sliced_image_with_bg(image >= low_range & image <= high_range) = 255;
+
+% Display the original, sliced (without background), and sliced (with background) images
+subplot(1, 3, 1);
+imshow(image);
+title('Original Image');
+
+subplot(1, 3, 2);
+imshow(sliced_image_no_bg);
+title('Sliced Image (without Background)');
+
+subplot(1, 3, 3);
+imshow(sliced_image_with_bg);
+title('Sliced Image (with Background)');

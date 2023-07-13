@@ -1,0 +1,30 @@
+% Read the image
+image = imread('cameraman.tif');
+
+% Convert the image to grayscale if necessary
+if size(image, 3) > 1
+    image = rgb2gray(image);
+end
+
+% Apply the DFT
+dft = fft2(image);
+
+% Shift the zero-frequency component to the center of the spectrum
+shifted_dft = fftshift(dft);
+
+% Compute the magnitude spectrum
+magnitude_spectrum = abs(shifted_dft);
+
+% Compute the logarithmic magnitude spectrum for better visualization
+log_magnitude_spectrum = log(1 + magnitude_spectrum);
+
+% Display the original image and the magnitude spectrum
+figure;
+
+subplot(1, 2, 1);
+imshow(image);
+title('Original Image');
+
+subplot(1, 2, 2);
+imshow(log_magnitude_spectrum, []);
+title('Magnitude Spectrum (DFT)');

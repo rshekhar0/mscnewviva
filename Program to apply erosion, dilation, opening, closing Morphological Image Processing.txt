@@ -1,0 +1,28 @@
+% Read the input image
+inputImage = imread('cameraman.tif');
+
+% Convert the image to binary (if necessary)
+binaryImage = imbinarize(inputImage);
+
+% Define the structuring element for the operations
+se = strel('disk', 3); % You can change the shape and size of the structuring element
+
+% Apply erosion
+erodedImage = imerode(binaryImage, se);
+
+% Apply dilation
+dilatedImage = imdilate(binaryImage, se);
+
+% Apply opening
+openedImage = imopen(binaryImage, se);
+
+% Apply closing
+closedImage = imclose(binaryImage, se);
+
+% Display the results
+subplot(2, 3, 1), imshow(inputImage), title('Input Image');
+subplot(2, 3, 2), imshow(binaryImage), title('Binary Image');
+subplot(2, 3, 3), imshow(erodedImage), title('Eroded Image');
+subplot(2, 3, 4), imshow(dilatedImage), title('Dilated Image');
+subplot(2, 3, 5), imshow(openedImage), title('Opened Image');
+subplot(2, 3, 6), imshow(closedImage), title('Closed Image');

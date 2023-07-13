@@ -1,0 +1,111 @@
+% Read the grayscale image
+gray_image = imread('cameraman.tif');
+
+% Read the color image
+color_image = imread('trees.tif');
+
+% Kernels for smoothing (Low-pass)
+low_pass_kernel_3x3 = ones(3) / 9;
+low_pass_kernel_5x5 = ones(5) / 25;
+low_pass_kernel_7x7 = ones(7) / 49;
+
+% Kernels for sharpening (High-pass)
+high_pass_kernel_3x3 = [-1 -1 -1; -1 9 -1; -1 -1 -1];
+high_pass_kernel_5x5 = [-1 -1 -1 -1 -1; -1 1 2 1 -1; -1 2 4 2 -1; -1 1 2 1 -1; -1 -1 -1 -1 -1];
+high_pass_kernel_7x7 = [0 -1 -1 -1 -1 -1 0; -1 0 -1 -1 -1 0 -1; -1 -1 0 -1 0 -1 -1; -1 -1 -1 24 -1 -1 -1; -1 -1 0 -1 0 -1 -1; -1 0 -1 -1 -1 0 -1; 0 -1 -1 -1 -1 -1 0];
+
+% Apply smoothing filters on grayscale image
+smoothed_gray_3x3 = imfilter(gray_image, low_pass_kernel_3x3);
+smoothed_gray_5x5 = imfilter(gray_image, low_pass_kernel_5x5);
+smoothed_gray_7x7 = imfilter(gray_image, low_pass_kernel_7x7);
+
+% Apply sharpening filters on grayscale image
+sharpened_gray_3x3 = imfilter(gray_image, high_pass_kernel_3x3);
+sharpened_gray_5x5 = imfilter(gray_image, high_pass_kernel_5x5);
+sharpened_gray_7x7 = imfilter(gray_image, high_pass_kernel_7x7);
+
+% Apply smoothing filters on color image
+smoothed_color_3x3 = imfilter(color_image, low_pass_kernel_3x3);
+smoothed_color_5x5 = imfilter(color_image, low_pass_kernel_5x5);
+smoothed_color_7x7 = imfilter(color_image, low_pass_kernel_7x7);
+
+% Apply sharpening filters on color image
+sharpened_color_3x3 = imfilter(color_image, high_pass_kernel_3x3);
+sharpened_color_5x5 = imfilter(color_image, high_pass_kernel_5x5);
+sharpened_color_7x7 = imfilter(color_image, high_pass_kernel_7x7);
+
+% Display the grayscale images
+figure;
+subplot(3, 3, 1);
+imshow(gray_image);
+title('Original Grayscale Image');
+
+subplot(3, 3, 2);
+imshow(smoothed_gray_3x3);
+title('Smoothed (Low-pass) 3x3');
+
+subplot(3, 3, 3);
+imshow(sharpened_gray_3x3);
+title('Sharpened (High-pass) 3x3');
+
+subplot(3, 3, 4);
+imshow(gray_image);
+title('Original Grayscale Image');
+
+subplot(3, 3, 5);
+imshow(smoothed_gray_5x5);
+title('Smoothed (Low-pass) 5x5');
+
+subplot(3, 3, 6);
+imshow(sharpened_gray_5x5);
+title('Sharpened (High-pass) 5x5');
+
+subplot(3, 3, 7);
+imshow(gray_image);
+title('Original Grayscale Image');
+
+subplot(3, 3, 8);
+imshow(smoothed_gray_7x7);
+title('Smoothed (Low-pass) 7x7');
+
+subplot(3, 3, 9);
+imshow(sharpened_gray_7x7);
+title('Sharpened (High-pass) 7x7');
+
+% Display the color images
+figure;
+subplot(3, 3, 1);
+imshow(color_image);
+title('Original Color Image');
+
+subplot(3, 3, 2);
+imshow(smoothed_color_3x3);
+title('Smoothed (Low-pass) 3x3');
+
+subplot(3, 3, 3);
+imshow(sharpened_color_3x3);
+title('Sharpened (High-pass) 3x3');
+
+subplot(3, 3, 4);
+imshow(color_image);
+title('Original Color Image');
+
+subplot(3, 3, 5);
+imshow(smoothed_color_5x5);
+title('Smoothed (Low-pass) 5x5');
+
+subplot(3, 3, 6);
+imshow(sharpened_color_5x5);
+title('Sharpened (High-pass) 5x5');
+
+subplot(3, 3, 7);
+imshow(color_image);
+title('Original Color Image');
+
+subplot(3, 3, 8);
+imshow(smoothed_color_7x7);
+title('Smoothed (Low-pass) 7x7');
+
+subplot(3, 3, 9);
+imshow(sharpened_color_7x7);
+title('Sharpened (High-pass) 7x7');

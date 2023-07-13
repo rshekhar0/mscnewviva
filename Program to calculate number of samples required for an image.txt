@@ -1,0 +1,27 @@
+//scilab
+
+clc ;
+close ;
+m = 4;
+n = 6;
+N = 400;
+N2 = 2* N ;
+Fs = m* N2 * n * N2 ;
+disp('Number of samples required to preserve the information in the image=',Fs);
+or
+disp(['Number of samples required to preserve the information in the image = ', num2str(Fs)]);
+
+%matlab
+
+% Image resolution
+imageWidth = 640;   % Width of the image in pixels
+imageHeight = 480;  % Height of the image in pixels
+
+% Desired level of detail or accuracy
+detailLevel = 2;    % Number of samples per pixel (adjust as needed)
+
+% Calculate the number of samples required
+numSamples = imageWidth * imageHeight * detailLevel;
+
+% Display the result
+disp(['Number of samples required: ' num2str(numSamples)]);

@@ -1,0 +1,20 @@
+clc;
+clear all;
+close all;
+warning off
+I= imread("yellowlily.jpg");
+I=rgb2gray(I);
+figure
+subplot(2,2,1);
+imshow(I);
+title("Original Image");
+subplot(2,2,2);
+imhist(I);
+title("Histogram");
+J= histeq(I);
+subplot(2,2,3);
+imshow(J);
+title("Histogram equailized image");
+subplot(2,2,4);
+imhist(J);
+title("Histogram");

@@ -1,0 +1,39 @@
+%matlab
+
+clc;
+clear all;
+a = imread("E:\Msc IT Part_1\SEM_2\Practical\Rahul\DIP\Exam\Program to perform image averaging (image addition) for noise reduction\greyninja.png");
+b = imread("E:\Msc IT Part_1\SEM_2\Practical\Rahul\DIP\Exam\Program to perform image averaging (image addition) for noise reduction\spiderman.png") ;
+A = rgb2gray(a);
+B = rgb2gray(b);
+C = imadd(b,a);
+D =imsubtract(b,a);
+figure(1);
+subplot(2,2,1);
+imshow(a);
+subplot(2,2,2 );
+imshow(b);
+subplot(2,2,3);
+imshow(C);
+subplot(2,2,4);
+imshow(D);
+
+-----------------------------
+
+clc;
+clear all;
+a = imread("toysflash.png");
+b = imread("toysnoflash.png") ;
+A = rgb2gray(a);
+B = rgb2gray(b);
+C = imadd(b,a);
+D =imsubtract(b,a);
+figure(1);
+subplot(2,2,1);
+imshow(a);
+subplot(2,2,2 );
+imshow(b);
+subplot(2,2,3);
+imshow(C);
+subplot(2,2,4);
+imshow(D);

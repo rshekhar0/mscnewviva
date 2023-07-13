@@ -1,0 +1,38 @@
+%matlab
+
+% Read the grayscale image
+gray_image = imread('cameraman.tif');
+
+% Apply false coloring (pseudo-coloring)
+pseudo_color_image = ind2rgb(gray2ind(gray_image, 256), jet(256));
+
+% Display the grayscale image and the pseudo-colored image
+figure;
+
+subplot(1, 2, 1);
+imshow(gray_image);
+title('Grayscale Image');
+
+subplot(1, 2, 2);
+imshow(pseudo_color_image);
+title('Pseudo-colored Image');
+
+
+or
+
+clc;
+close;
+a = imread("E:\Msc IT Part_1\SEM_2\Practical\Rahul\DIP\Exam\image\nature.jpg");
+//Displaying Original RGB image
+subplot(2,2,1);
+imshow(a);
+title("Original Image")
+//Displaying Gray level image
+b = rgb2gray(a);
+subplot(2,2,2);
+imshow(b);
+title("Gray Level Image")
+//Displaying False coloring(Pseudo) image
+subplot(2,2,3);
+imshow(b,jetcolormap(256));
+title("Pseudo Color Image");

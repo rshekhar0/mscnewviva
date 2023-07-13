@@ -1,0 +1,43 @@
+clc;
+clear;
+close all;
+A = imread("peppers.png");
+R = A;
+G = A;
+B = A;
+ar=zeros(1,256);
+ag=zeros(1,256);
+ab=zeros(1,256);
+[x,y,z]=size(A);
+R(:,:,2)=0;
+R(:,:,3)=0;
+subplot(2,2,1)
+imshow(R)
+title("Red");
+G(:,:,1)=0;
+G(:,:,3)=0;
+subplot(2,2,2)
+imshow(G)
+title("Green");
+B(:,:,1)=0;
+B(:,:,2)=0;
+subplot(2,2,3)
+imshow(B)
+title("Blue");
+for i=1:x
+for j=1:y
+m=A(i,j,1);
+ar(1:m) =ar(1:m)+1;
+n=A(i,j,2);
+ag(1:n) =ag(1:n)+1;
+o=A(i,j,3);
+ab(1:o) =ab(1:o)+1;
+end
+end
+subplot(2,2,4);
+hold on
+bar (ar, "FaceColor","r","EdgeColor","r");
+bar (ag,"FaceColor","g","EdgeColor","g");
+bar (ab,"FaceColor","b","EdgeColor","b");
+hold off
+title("histogram");

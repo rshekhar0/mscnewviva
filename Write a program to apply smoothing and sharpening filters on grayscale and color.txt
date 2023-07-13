@@ -1,0 +1,71 @@
+% Read the grayscale image
+grayscaleImage = imread('cameraman.tif');
+% grayscaleImage = imread("peppers.png");
+
+% Convert grayscale image to double precision for filtering
+grayscaleImage = im2double(grayscaleImage);
+
+% Display the original grayscale image
+figure;
+imshow(grayscaleImage);
+title('Original Grayscale Image');
+
+% Apply low-pass (smoothing) filter to the grayscale image
+lowPassFilter = fspecial('average', [5 5]); % 5x5 averaging filter
+smoothedImage = imfilter(grayscaleImage, lowPassFilter);
+
+% Display the smoothed grayscale image
+figure;
+imshow(smoothedImage);
+title('Smoothed Grayscale Image');
+
+% Apply high-pass (sharpening) filter to the grayscale image
+highPassFilter = fspecial('laplacian', 0.2); % Laplacian filter
+sharpenedImage = grayscaleImage - imfilter(grayscaleImage, highPassFilter);
+
+% Display the sharpened grayscale image
+figure;
+imshow(sharpenedImage);
+title('Sharpened Grayscale Image');
+
+% Read the color image
+colorImage = imread('pappers.png');
+
+% Convert color image to double precision for filtering
+colorImage = im2double(colorImage);
+
+% Display the original color image
+figure;
+imshow(colorImage);
+title('Original Color Image');
+
+% Split the color image into separate channels (RGB)
+redChannel = colorImage(:, :, 1);
+greenChannel = colorImage(:, :, 2);
+blueChannel = colorImage(:, :, 3);
+
+% Apply low-pass (smoothing) filter to each color channel
+smoothedRedChannel = imfilter(redChannel, lowPassFilter);
+smoothedGreenChannel = imfilter(greenChannel, lowPassFilter);
+smoothedBlueChannel = imfilter(blueChannel, lowPassFilter);
+
+% Combine the smoothed color channels
+smoothedColorImage = cat(3, smoothedRedChannel, smoothedGreenChannel, smoothedBlueChannel);
+
+% Display the smoothed color image
+figure;
+imshow(smoothedColorImage);
+title('Smoothed Color Image');
+
+% Apply high-pass (sharpening) filter to each color channel
+sharpenedRedChannel = redChannel - imfilter(redChannel, highPassFilter);
+sharpenedGreenChannel = greenChannel - imfilter(greenChannel, highPassFilter);
+sharpenedBlueChannel = blueChannel - imfilter(blueChannel, highPassFilter);
+
+% Combine the sharpened color channels
+sharpenedColorImage = cat(3, sharpenedRedChannel, sharpenedGreenChannel, sharpenedBlueChannel);
+
+% Display the sharpened color image
+figure;
+imshow(sharpenedColorImage);
+title('Sharpened Color Image');

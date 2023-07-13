@@ -1,0 +1,19 @@
+% Load the image
+img = imread('peppers.png');
+
+% Convert the image to grayscale
+gray_img = rgb2gray(img);
+
+% Set the piecewise linear transformation parameters (adjust as needed)
+% Define the mapping function: y = ax + b
+a1 = 1; b1 = 0; % Segment 1
+a2 = 1; b2 = 100; % Segment 2
+
+% Perform piecewise linear transformation
+transformed_img = gray_img;
+transformed_img(gray_img < 128) = a1 * gray_img(gray_img < 128) + b1;
+transformed_img(gray_img >= 128) = a2 * gray_img(gray_img >= 128) + b2;
+
+% Display the original and transformed images
+subplot(1, 2, 1), imshow(gray_img), title('Original Grayscale Image');
+subplot(1, 2, 2), imshow(transformed_img), title('Piecewise Linear Transformed Image');

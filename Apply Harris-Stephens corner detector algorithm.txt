@@ -1,0 +1,21 @@
+% Read the image
+I = imread('trailer.jpg');
+
+% Convert the image to grayscale
+grayImage = rgb2gray(I);
+
+% Detect corners using the Harris-Stephens algorithm
+corners = detectHarrisFeatures(grayImage);
+
+% Display the original image with corners overlaid
+imshow(I);
+hold on;
+plot(corners.selectStrongest(50));
+
+
+or
+
+I = imread('cameraman.tif');
+points = detectHarrisFeatures(I);
+imshow(I); hold on;
+plot(points.selectStrongest(50));

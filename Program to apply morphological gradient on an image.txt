@@ -1,0 +1,18 @@
+% Read the input image
+inputImage = imread('cameraman.tif');
+
+% Convert the input image to grayscale if it's not already
+if size(inputImage, 3) > 1
+    inputImage = rgb2gray(inputImage);
+end
+
+% Convert the image to binary using a threshold
+binaryImage = imbinarize(inputImage, graythresh(inputImage));
+
+% Apply morphological gradient
+se = strel('disk', 3); % Define the structuring element (you can adjust the size as needed)
+gradientImage = imgradient(imtophat(binaryImage, se));
+
+% Display the original and gradient images
+subplot(1, 2, 1), imshow(binaryImage), title('Binary Image');
+subplot(1, 2, 2), imshow(gradientImage), title('Morphological Gradient');

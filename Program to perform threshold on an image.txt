@@ -1,0 +1,15 @@
+% Load the image
+img = imread('peppers.png');
+
+% Convert the image to grayscale
+gray_img = rgb2gray(img);
+
+% Set the threshold value (adjust as needed)
+threshold = 128;
+
+% Perform thresholding
+thresholded_img = gray_img > threshold;
+
+% Display the original and thresholded images
+subplot(1, 2, 1), imshow(gray_img), title('Original Grayscale Image');
+subplot(1, 2, 2), imshow(thresholded_img), title('Thresholded Image');

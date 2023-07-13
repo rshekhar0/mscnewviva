@@ -1,0 +1,31 @@
+% Read the input image
+inputImage = imread('peppers.png');
+
+% Convert the input image to grayscale if it's not already
+if size(inputImage, 3) > 1
+    grayImage = rgb2gray(inputImage);
+else
+    grayImage = inputImage;
+end
+
+% Normalize the grayscale image
+normalizedImage = double(grayImage) / 255;
+
+% Apply Sobel edge detection
+sobelEdges = edge(normalizedImage, 'sobel');
+
+% Apply Prewitt edge detection
+prewittEdges = edge(normalizedImage, 'prewitt');
+
+% Apply Marr-Hildreth edge detection
+marrHildrethEdges = edge(normalizedImage, 'log');
+
+% Apply Canny edge detection
+cannyEdges = edge(normalizedImage, 'canny');
+
+% Display the original and edge-detected images
+subplot(2, 3, 1), imshow(inputImage), title('Original Image');
+subplot(2, 3, 2), imshow(sobelEdges), title('Sobel');
+subplot(2, 3, 3), imshow(prewittEdges), title('Prewitt');
+subplot(2, 3, 4), imshow(marrHildrethEdges), title('Marr-Hildreth');
+subplot(2, 3, 5), imshow(cannyEdges), title('Canny');

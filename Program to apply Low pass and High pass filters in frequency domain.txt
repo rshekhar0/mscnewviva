@@ -1,0 +1,53 @@
+% Read the image
+image = imread('cameraman.tif');
+
+% Convert the image to grayscale if necessary
+if size(image, 3) > 1
+    image = rgb2gray(image);
+end
+
+% Apply the Discrete Fourier Transform (DFT)
+dft = fft2(image);
+
+% Shift the zero-frequency component to the center of the spectrum
+shifted_dft = fftshift(dft);
+
+% Define the filter parameters
+cutoff_frequency = 20; % Modify this value to adjust the cutoff frequency
+
+% Create a low-pass filter
+low_pass_filter = fspecial('gaussian', size(image), cutoff_frequency);
+
+% Create a high-pass filter
+high_pass_filter = 1 - low_pass_filter;
+
+% Apply the filters in the frequency domain
+filtered_dft_low = shifted_dft .* low_pass_filter;
+filtered_dft_high = shifted_dft .* high_pass_filter;
+
+% Shift the filtered spectra back
+shifted_filtered_low = ifftshift(filtered_dft_low);
+shifted_filtered_high = ifftshift(filtered_dft_high);
+
+% Apply the inverse Discrete Fourier Transform (IDFT)
+filtered_image_low = ifft2(shifted_filtered_low);
+filtered_image_high = ifft2(shifted_filtered_high);
+
+% Take the real part of the filtered images (remove imaginary components)
+filtered_image_low = real(filtered_image_low);
+filtered_image_high = real(filtered_image_high);
+
+% Display the original image and the filtered images
+figure;
+
+subplot(1, 3, 1);
+imshow(image);
+title('Original Image');
+
+subplot(1, 3, 2);
+imshow(filtered_image_low, []);
+title('Low-Pass Filtered Image');
+
+subplot(1, 3, 3);
+imshow(filtered_image_high, []);
+title('High-Pass Filtered Image');

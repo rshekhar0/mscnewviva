@@ -1,0 +1,54 @@
+//scilab
+clc;
+clear all;
+figure(1)
+// checker board
+subplot(3,3,1);
+i=imread('E:\Msc IT Part_1\SEM_2\Practical\Rahul\DIP\Exam\Program to study the effects of varying the number of intensity levels in a digital\pikachu.png');
+imshow(i);
+title('original image');
+subplot(3,3,2);
+j=imresize(i,0.8);
+imshow(j);
+title('resized image 0.8');
+subplot(3,3,3);
+j=imresize(i,0.7);
+imshow(j);
+title('resized image 0.7');
+subplot(3,3,4);
+j=imresize(i,0.6);
+imshow(j);
+title('resized image 0.6');
+subplot(3,3,5);
+j=imresize(i,0.1);
+imshow(j);
+title('resized image 0.1');
+
+%matlab
+
+% Load the original image
+originalImage = imread('yellowlily.jpg');
+
+% Convert the image to grayscale if it is in RGB format
+if size(originalImage, 3) == 3
+    grayscaleImage = rgb2gray(originalImage);
+else
+    grayscaleImage = originalImage;
+end
+
+% Display the original image
+figure;
+subplot(2, 2, 1);
+imshow(grayscaleImage);
+title('Original Image');
+
+% Reduce the number of intensity levels
+numLevels = [2,4,6,8,10];
+reducedImages = cell(1, length(numLevels));
+
+for i = 1:length(numLevels)
+    reducedImages{i} = imadjust(grayscaleImage, [], [], numLevels(i));
+    subplot(2, 4, i+3);
+    imshow(reducedImages{i});
+    title(sprintf('%d Levels', numLevels(i)));
+end

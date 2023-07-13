@@ -1,0 +1,35 @@
+% Read the image
+rgbImage = imread('peppers.png');
+
+% Display the original image
+figure;
+subplot(3, 2, 1);
+imshow(rgbImage);
+title('Original RGB Image');
+
+% Convert RGB to HSV
+hsvImage = rgb2hsv(rgbImage);
+
+% Display the converted image
+subplot(3, 2, 2);
+imshow(hsvImage);
+title('HSV Image Hue, Saturation, Value');
+
+% Access individual color channels
+hueChannel = hsvImage(:, :, 1);
+saturationChannel = hsvImage(:, :, 2);
+valueChannel = hsvImage(:, :, 3);
+
+% Display individual channels
+
+subplot(3, 2, 3);
+imshow(hueChannel);
+title('Hue Channel');
+
+subplot(3, 2, 4);
+imshow(saturationChannel);
+title('Saturation Channel');
+
+subplot(3, 2, 5);
+imshow(valueChannel);
+title('Value Channel');

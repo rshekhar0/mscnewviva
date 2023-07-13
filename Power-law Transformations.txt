@@ -1,0 +1,19 @@
+% Load the image
+img = imread('peppers.png');
+
+% Convert the image to grayscale
+gray_img = rgb2gray(img);
+
+% Set the power-law transformation parameters (adjust as needed)
+gamma = 0.5; % Gamma value (less than 1 for darkening, greater than 1 for brightening)
+c = 1; % Constant for scaling
+
+% Perform power-law transformation
+power_law_img = c * double(gray_img).^gamma;
+
+% Scale the image to the range [0, 255]
+scaled_img = uint8((255 / max(power_law_img(:))) * power_law_img);
+
+% Display the original and power-law transformed images
+subplot(1, 2, 1), imshow(gray_img), title('Original Grayscale Image');
+subplot(1, 2, 2), imshow(scaled_img), title('Power-Law Transformed Image');

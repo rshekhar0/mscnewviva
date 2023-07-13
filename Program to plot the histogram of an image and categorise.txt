@@ -1,0 +1,30 @@
+% Read the image
+image = imread('cameraman.tif');
+
+% Convert the image to grayscale if necessary
+if size(image, 3) > 1
+    image = rgb2gray(image);
+end
+
+% Calculate the histogram
+histogram = imhist(image);
+
+% Plot the histogram
+figure;
+bar(histogram);
+title('Histogram of the Image');
+xlabel('Intensity');
+ylabel('Frequency');
+
+% Categorize the intensities
+num_bins = numel(histogram);
+intensity_range = linspace(0, 255, num_bins);
+
+low_range = intensity_range(histogram < 100); % Modify the threshold value as needed
+mid_range = intensity_range(histogram >= 100 & histogram < 200); % Modify the threshold values as needed
+high_range = intensity_range(histogram >= 200); % Modify the threshold value as needed
+
+% Display the categorized intensity ranges
+fprintf('Low Intensity Range: %d - %d\n', low_range(1), low_range(end));
+fprintf('Mid Intensity Range: %d - %d\n', mid_range(1), mid_range(end));
+fprintf('High Intensity Range: %d - %d\n', high_range(1), high_range(end));

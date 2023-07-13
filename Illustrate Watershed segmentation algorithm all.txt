@@ -1,0 +1,61 @@
+rgb = imread("pears.png");
+I = im2gray(rgb);
+figure;
+subplot(4,2,1);
+imshow(I)
+
+text(732,501,"Image courtesy of Corel(R)",...
+     "FontSize",7,"HorizontalAlignment","right")
+
+gmag = imgradient(I);
+subplot(4,2,2);
+imshow(gmag,[])
+title("Gradient Magnitude")
+
+L = watershed(gmag);
+Lrgb = label2rgb(L);
+subplot(4,2,3);
+imshow(Lrgb)
+title("Watershed Transform of Gradient Magnitude")
+
+se = strel("disk",20);
+Io = imopen(I,se);
+subplot(4,2,4);
+imshow(Io)
+title("Opening")
+
+Ie = imerode(I,se);
+Iobr = imreconstruct(Ie,I);
+subplot(4,2,5);
+imshow(Iobr)
+title("Opening-by-Reconstruction")
+
+Iobrd = imdilate(Iobr,se);
+Iobrcbr = imreconstruct(imcomplement(Iobrd),imcomplement(Iobr));
+Iobrcbr = imcomplement(Iobrcbr);
+subplot(4,2,6);
+imshow(Iobrcbr)
+title("Opening-Closing by Reconstruction")
+
+fgm = imregionalmax(Iobrcbr);
+subplot(4,2,7);
+imshow(fgm)
+title("Regional Maxima of Opening-Closing by Reconstruction")
+
+bw = imbinarize(Iobrcbr);
+imshow(bw)
+title("Thresholded Opening-Closing by Reconstruction")
+
+D = bwdist(bw);
+DL = watershed(D);
+bgm = DL == 0;
+imshow(bgm)
+title("Watershed Ridge Lines")
+
+subplot(4,2,8);
+imshow(I)
+hold on
+himage = imshow(Lrgb);
+himage.AlphaData = 0.3;
+%title("Colored Labels Superimposed Transparently on Original Image")
+title("Watershed Gradient Magnitude")

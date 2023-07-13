@@ -1,0 +1,26 @@
+% Read the image
+image = imread('sherlock.jpg');
+
+% Convert the image to grayscale if necessary
+if size(image, 3) > 1
+    image = rgb2gray(image);
+end
+
+% Perform bit-plane slicing
+bit_planes = cell(1, 8); % Cell array to store bit-plane images
+for i = 1:8
+    bit_planes{i} = bitget(image, i); % Get the i-th bit plane
+end
+
+% Display the original image and the bit-plane images
+figure;
+
+subplot(3, 3, 1);
+imshow(image);
+title('Original Image');
+
+for i = 1:8
+    subplot(3, 3, i+1);
+    imshow(logical(bit_planes{i})); % Convert to logical for better visualization
+    title(['Bit-Plane ' num2str(i)]);
+end

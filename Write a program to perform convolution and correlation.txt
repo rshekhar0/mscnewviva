@@ -1,0 +1,58 @@
+% Perform online Read and display the original image
+originalImage = imread('cameraman.tif');
+imshow(originalImage);
+title('Original Image');
+
+% Convert the image to grayscale if necessary
+if size(originalImage, 3) > 1
+    grayImage = rgb2gray(originalImage);
+else
+    grayImage = originalImage;
+end
+
+% Define the kernel for convolution and correlation
+kernel = fspecial('gaussian', [5 5], 1); % Gaussian kernel of size 5x5
+
+% Perform convolution
+convolvedImage = conv2(double(grayImage), kernel, 'same');
+
+% Perform correlation
+correlatedImage = xcorr2(double(grayImage), kernel);
+
+% Display the convolved image
+figure;
+subplot(1, 2, 1);
+imshow(uint8(convolvedImage));
+title('Convolved Image');
+
+% Display the correlated image
+subplot(1, 2, 2);
+imshow(uint8(correlatedImage));
+title('Correlated Image');
+
+or
+
+% offline Example signals
+x = [1 2 3 4 5];
+h = [0.5 0.5 0.5];
+
+% Perform convolution
+y_conv = conv(x, h);
+
+% Perform correlation
+y_corr = xcorr(x, h);
+
+% Display the original signals
+disp('Original signals:');
+disp('x =');
+disp(x);
+disp('h =');
+disp(h);
+
+% Display the convolution result
+disp('Convolution result:');
+disp(y_conv);
+
+% Display the correlation result
+disp('Correlation result:');
+disp(y_corr);

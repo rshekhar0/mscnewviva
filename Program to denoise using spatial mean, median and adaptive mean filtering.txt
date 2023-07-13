@@ -1,0 +1,36 @@
+% Read the noisy image
+noisyImage = imread('peppers.png');
+
+% Convert the image to grayscale if it's a color image
+if size(noisyImage, 3) > 1
+    noisyImage = rgb2gray(noisyImage);
+end
+
+% Display the noisy image
+subplot(2, 2, 1);
+imshow(noisyImage);
+title('Noisy Image');
+
+% Apply spatial mean filtering
+meanFiltered = imfilter(noisyImage, fspecial('average', [3 3]));
+
+% Display the mean filtered image
+subplot(2, 2, 2);
+imshow(meanFiltered);
+title('Mean Filtered');
+
+% Apply spatial median filtering
+medianFiltered = medfilt2(noisyImage);
+
+% Display the median filtered image
+subplot(2, 2, 3);
+imshow(medianFiltered);
+title('Median Filtered');
+
+% Apply adaptive mean filtering
+adaptiveMeanFiltered = adapthisteq(noisyImage);
+
+% Display the adaptive mean filtered image
+subplot(2, 2, 4);
+imshow(adaptiveMeanFiltered);
+title('Adaptive Mean Filtered');

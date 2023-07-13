@@ -1,0 +1,12 @@
+clc;
+clear;
+close all;
+S=imread("peppers.png");
+figure;
+imshow(S);
+title("Original Image");
+g=[0 1 0;1 4 1; 0 1 0];
+output=imfilter(S,g);
+figure;
+imshow(output);
+title("Laplacian Image After filtering")

@@ -1,0 +1,23 @@
+clc 
+clear all 
+close all 
+warning off
+A=[ 0 0 0 0 0 0 0 0 0 0 0 
+	0 0 1 0 0 0 0 0 0 0 0 
+	0 0 1 0 0 1 1 1 1 0 0 
+	0 1 1 1 0 0 0 0 0 0 0 
+	0 0 1 0 0 0 0 1 1 0 0
+	0 0 0 0 1 0 0 1 1 1 0 
+	0 0 0 1 1 1 0 0 1 0 0 
+	0 0 0 0 1 0 0 0 0 0 0 
+	0 0 0 0 0 0 0 0 0 0 0] ;
+figure;
+subplot(2,2,1);
+imshow (A) ;
+title('Original Image');
+se1=[0 1 0; 1 1 1 ;0 1 0];
+se2=~se1;
+bw=bwhitmiss(A,se1,se2);
+subplot(2,2,2)
+imshow(bw);
+title('Output of Hit or Miss Transform');
